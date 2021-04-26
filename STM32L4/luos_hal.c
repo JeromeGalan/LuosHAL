@@ -714,7 +714,7 @@ static void LuosHAL_FlashEraseLuosMemoryInfo(void)
 void LuosHAL_FlashWriteLuosMemoryInfo(uint32_t addr, uint16_t size, uint8_t *data)
 {
     // Before writing we have to erase the entire page
-    // to do that we have to backup current falues by copying it into RAM
+    // to do that we have to backup current values by copying it into RAM
     uint8_t page_backup[PAGE_SIZE];
     memcpy(page_backup, (void *)ADDRESS_ALIASES_FLASH, PAGE_SIZE);
 
