@@ -46,5 +46,7 @@ uint8_t LuosHAL_GetPTPState(uint8_t PTPNbr);
 void LuosHAL_ComputeCRC(uint8_t *data, uint8_t *crc);
 void LuosHAL_FlashWriteLuosMemoryInfo(uint32_t addr, uint16_t size, uint8_t *data);
 void LuosHAL_FlashReadLuosMemoryInfo(uint32_t addr, uint16_t size, uint8_t *data);
+void LuosHAL_SetBootloaderMode(void);
+void LuosHAL_Reboot(void);
 
 #endif /* _LUOSHAL_H_ */
