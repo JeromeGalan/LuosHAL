@@ -775,6 +775,15 @@ void LuosHAL_SetBootloaderMode(void)
 }
 
 /******************************************************************************
+ * @brief Set boot mode in shared flash memory
+ * @param 
+ * @return
+ ******************************************************************************/
+void LuosHAL_SaveNodeID(uint32_t address, uint16_t node_id)
+{
+}
+
+/******************************************************************************
  * @brief software reboot the microprocessor
  * @param 
  * @return

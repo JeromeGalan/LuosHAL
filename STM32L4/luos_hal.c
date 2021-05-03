@@ -832,6 +832,34 @@ void LuosHAL_SetBootloaderMode(void)
 }
 
 /******************************************************************************
+ * @brief Set boot mode in shared flash memory
+ * @param 
+ * @return
+ ******************************************************************************/
+void LuosHAL_SaveNodeID(uint32_t address, uint16_t node_id)
+{
+    uint32_t page_error = 0;
+    FLASH_EraseInitTypeDef s_eraseinit;
+    uint32_t* p_start = (uint32_t*)address;
+
+    uint32_t saved_data = *p_start;
+    uint32_t data_to_write = saved_data | (0x0002 << 8);
+
+    s_eraseinit.TypeErase = FLASH_TYPEERASE_PAGES;
+    s_eraseinit.Page = 25 - 1;
+    s_eraseinit.NbPages = 1;
+
+    // Unlock flash
+    HAL_FLASH_Unlock();
+    // Erase Page
+    HAL_FLASHEx_Erase(&s_eraseinit, &page_error);
+    // ST hal flash program function write data by uint64_t raw data
+    HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD, (uint32_t)address, (uint64_t)data_to_write);
+    // re-lock FLASH
+    HAL_FLASH_Lock();
+}
+
+/******************************************************************************
  * @brief software reboot the microprocessor
  * @param 
  * @return
