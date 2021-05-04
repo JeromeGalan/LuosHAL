@@ -784,6 +784,16 @@ void LuosHAL_SaveNodeID(uint32_t address, uint16_t node_id)
 }
 
 /******************************************************************************
+ * @brief Set boot mode in shared flash memory
+ * @param 
+ * @return
+ ******************************************************************************/
+uint16_t LuosHAL_GetNodeID(uint32_t address)
+{
+    return 0;
+}
+
+/******************************************************************************
  * @brief software reboot the microprocessor
  * @param 
  * @return
