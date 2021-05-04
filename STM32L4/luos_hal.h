@@ -53,6 +53,7 @@ void LuosHAL_JumpToApp(uint32_t);
 void LuosHAL_SetApplicationMode(void);
 void LuosHAL_SetBootloaderMode(void);
 void LuosHAL_SaveNodeID(uint32_t, uint16_t);
+uint16_t LuosHAL_GetNodeID(uint32_t);
 void LuosHAL_Reboot(void);
 
 #endif /* _LUOSHAL_H_ */

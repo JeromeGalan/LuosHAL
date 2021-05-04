@@ -832,8 +832,8 @@ void LuosHAL_SetBootloaderMode(void)
 }
 
 /******************************************************************************
- * @brief Set boot mode in shared flash memory
- * @param 
+ * @brief Save node ID in shared flash memory
+ * @param Address, node_id
  * @return
  ******************************************************************************/
 void LuosHAL_SaveNodeID(uint32_t address, uint16_t node_id)
@@ -843,7 +843,7 @@ void LuosHAL_SaveNodeID(uint32_t address, uint16_t node_id)
     uint32_t* p_start = (uint32_t*)address;
 
     uint32_t saved_data = *p_start;
-    uint32_t data_to_write = saved_data | (0x0002 << 8);
+    uint32_t data_to_write = saved_data | (node_id << 8);
 
     s_eraseinit.TypeErase = FLASH_TYPEERASE_PAGES;
     s_eraseinit.Page = 25 - 1;
@@ -857,6 +857,20 @@ void LuosHAL_SaveNodeID(uint32_t address, uint16_t node_id)
     HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD, (uint32_t)address, (uint64_t)data_to_write);
     // re-lock FLASH
     HAL_FLASH_Lock();
+}
+
+/******************************************************************************
+ * @brief Get node id saved in flash memory
+ * @param Address
+ * @return node_id
+ ******************************************************************************/
+uint16_t LuosHAL_GetNodeID(uint32_t address)
+{
+    uint32_t* p_start = (uint32_t*)address;
+    uint32_t data = *p_start & 0x00FFFF00;
+    uint16_t node_id = (uint16_t)(data >> 8);
+
+    return node_id;
 }
 
 /******************************************************************************
