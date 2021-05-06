@@ -874,6 +874,35 @@ uint16_t LuosHAL_GetNodeID(uint32_t address)
 }
 
 /******************************************************************************
+ * @brief Save node ID in shared flash memory
+ * @param Address, node_id
+ * @return
+ ******************************************************************************/
+void LuosHAL_ProgramFlash(uint32_t address, uint8_t page, uint16_t size, uint8_t *data)
+{
+    uint32_t page_error = 0;
+    FLASH_EraseInitTypeDef s_eraseinit;
+
+    s_eraseinit.TypeErase = FLASH_TYPEERASE_PAGES;
+    s_eraseinit.Page = page - 1;
+    s_eraseinit.NbPages = 1;
+
+    // Unlock flash
+    HAL_FLASH_Unlock();
+    // Erase Page
+    HAL_FLASHEx_Erase(&s_eraseinit, &page_error);
+
+    // ST hal flash program function write data by uint64_t raw data
+    for (uint32_t i = 0; i < PAGE_SIZE; i += sizeof(uint64_t))
+    {
+        while (HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD, i + address, *(uint64_t *)(&data[i])) != HAL_OK)
+            ;
+    }
+    // re-lock FLASH
+    HAL_FLASH_Lock();
+}
+
+/******************************************************************************
  * @brief software reboot the microprocessor
  * @param 
  * @return
