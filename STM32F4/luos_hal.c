@@ -748,3 +748,21 @@ void LuosHAL_FlashReadLuosMemoryInfo(uint32_t addr, uint16_t size, uint8_t *data
 {
     memcpy(data, (void *)(addr), size);
 }
+
+/******************************************************************************
+ * @brief Set boot mode in shared flash memory
+ * @param 
+ * @return
+ ******************************************************************************/
+void LuosHAL_SetBootloaderMode(void)
+{
+}
+
+/******************************************************************************
+ * @brief software reboot the microprocessor
+ * @param 
+ * @return
+ ******************************************************************************/
+void LuosHAL_Reboot(void)
+{
+}
