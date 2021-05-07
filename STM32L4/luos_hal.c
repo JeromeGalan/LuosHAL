@@ -813,14 +813,13 @@ uint8_t LuosHAL_GetMode(void)
  * @param 
  * @return
  ******************************************************************************/
-void LuosHAL_SetApplicationMode(void)
+void LuosHAL_SetMode(uint8_t mode)
 {
     uint32_t page_error = 0;
     FLASH_EraseInitTypeDef s_eraseinit;
-    uint64_t data = 0x00000001; // select bootloader mode
 
     s_eraseinit.TypeErase = FLASH_TYPEERASE_PAGES;
-    s_eraseinit.Page      = 25 - 1;
+    s_eraseinit.Page      = SHARED_FLASH_PAGE - 1;
     s_eraseinit.NbPages   = 1;
 
     // Unlock flash
@@ -828,32 +827,7 @@ void LuosHAL_SetApplicationMode(void)
     // Erase Page
     HAL_FLASHEx_Erase(&s_eraseinit, &page_error);
     // ST hal flash program function write data by uint64_t raw data
-    HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD, (uint32_t)0x0800C000, (uint64_t)data);
-    // re-lock FLASH
-    HAL_FLASH_Lock();
-}
-
-/******************************************************************************
- * @brief Set boot mode in shared flash memory
- * @param 
- * @return
- ******************************************************************************/
-void LuosHAL_SetBootloaderMode(void)
-{
-    uint32_t page_error = 0;
-    FLASH_EraseInitTypeDef s_eraseinit;
-    uint64_t data = 0x00000000; // select bootloader mode
-
-    s_eraseinit.TypeErase = FLASH_TYPEERASE_PAGES;
-    s_eraseinit.Page      = 25 - 1;
-    s_eraseinit.NbPages   = 1;
-
-    // Unlock flash
-    HAL_FLASH_Unlock();
-    // Erase Page
-    HAL_FLASHEx_Erase(&s_eraseinit, &page_error);
-    // ST hal flash program function write data by uint64_t raw data
-    HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD, (uint32_t)0x0800C000, (uint64_t)data);
+    HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD, (uint32_t)SHARED_MEMORY_ADDRESS, (uint64_t)mode);
     // re-lock FLASH
     HAL_FLASH_Lock();
 }
