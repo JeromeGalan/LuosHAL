@@ -171,8 +171,9 @@
 #define APP_ADDRESS           (uint32_t)0x0800C800
 #define APP_FLASH_PAGE        26
 
-#define BOOT_MODE_MASK 0x000000FF
-#define NODE_ID_MASK   0x00FFFF00
-#define NODE_ID_OFFSET 8
+#define BOOT_MODE_MASK   0x000000FF
+#define BOOT_MODE_OFFSET 0
+#define NODE_ID_MASK     0x00FFFF00
+#define NODE_ID_OFFSET   8
 
 #endif /* _LUOSHAL_CONFIG_H_ */

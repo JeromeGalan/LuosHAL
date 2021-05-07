@@ -789,7 +789,7 @@ void LuosHAL_JumpToApp(uint32_t app_addr)
 uint8_t LuosHAL_GetMode(void)
 {
     uint32_t *p_start = (uint32_t *)SHARED_MEMORY_ADDRESS;
-    uint32_t data     = *p_start & BOOT_MODE_MASK;
+    uint32_t data     = (*p_start & BOOT_MODE_MASK) >> BOOT_MODE_OFFSET;
 
     return (uint8_t)data;
 }
@@ -801,7 +801,8 @@ uint8_t LuosHAL_GetMode(void)
  ******************************************************************************/
 void LuosHAL_SetMode(uint8_t mode)
 {
-    uint32_t page_error = 0;
+    uint64_t data_to_write = mode << BOOT_MODE_OFFSET;
+    uint32_t page_error    = 0;
     FLASH_EraseInitTypeDef s_eraseinit;
 
     s_eraseinit.TypeErase = FLASH_TYPEERASE_PAGES;
@@ -813,7 +814,7 @@ void LuosHAL_SetMode(uint8_t mode)
     // Erase Page
     HAL_FLASHEx_Erase(&s_eraseinit, &page_error);
     // ST hal flash program function write data by uint64_t raw data
-    HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD, (uint32_t)SHARED_MEMORY_ADDRESS, (uint64_t)mode);
+    HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD, (uint32_t)SHARED_MEMORY_ADDRESS, data_to_write);
     // re-lock FLASH
     HAL_FLASH_Lock();
 }
