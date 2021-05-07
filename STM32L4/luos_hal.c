@@ -766,8 +766,8 @@ typedef void (*pFunction)(void); /*!< Function pointer definition */
 
 void LuosHAL_JumpToApp(uint32_t app_addr)
 {
-    uint32_t  JumpAddress = *(__IO uint32_t*)(app_addr + 4);
-    pFunction Jump        = (pFunction)JumpAddress;
+    uint32_t JumpAddress = *(__IO uint32_t *)(app_addr + 4);
+    pFunction Jump       = (pFunction)JumpAddress;
 
     __disable_irq();
 
@@ -777,8 +777,35 @@ void LuosHAL_JumpToApp(uint32_t app_addr)
 
     SCB->VTOR = app_addr;
 
-    __set_MSP(*(__IO uint32_t*)app_addr);
+    __set_MSP(*(__IO uint32_t *)app_addr);
     Jump();
+}
+
+/******************************************************************************
+ * @brief Return bootloader mode saved in flash
+ * @param 
+ * @return
+ ******************************************************************************/
+uint8_t LuosHAL_GetMode(void)
+{
+    uint32_t *p_start = (uint32_t *)SHARED_MEMORY_ADDRESS;
+    uint8_t boot_mode = 0x00;
+
+    uint32_t data = *p_start & BOOT_MODE_MASK;
+
+    switch (data)
+    {
+        case 0:
+            boot_mode = BOOTLOADER_MODE;
+            break;
+        case 1:
+            boot_mode = APPLICATION_MODE;
+            break;
+        default:
+            break;
+    }
+
+    return boot_mode;
 }
 
 /******************************************************************************
@@ -790,11 +817,11 @@ void LuosHAL_SetApplicationMode(void)
 {
     uint32_t page_error = 0;
     FLASH_EraseInitTypeDef s_eraseinit;
-    uint64_t data = 0x00000001;         // select bootloader mode
+    uint64_t data = 0x00000001; // select bootloader mode
 
     s_eraseinit.TypeErase = FLASH_TYPEERASE_PAGES;
-    s_eraseinit.Page = 25 - 1;
-    s_eraseinit.NbPages = 1;
+    s_eraseinit.Page      = 25 - 1;
+    s_eraseinit.NbPages   = 1;
 
     // Unlock flash
     HAL_FLASH_Unlock();
@@ -815,11 +842,11 @@ void LuosHAL_SetBootloaderMode(void)
 {
     uint32_t page_error = 0;
     FLASH_EraseInitTypeDef s_eraseinit;
-    uint64_t data = 0x00000000;         // select bootloader mode
+    uint64_t data = 0x00000000; // select bootloader mode
 
     s_eraseinit.TypeErase = FLASH_TYPEERASE_PAGES;
-    s_eraseinit.Page = 25 - 1;
-    s_eraseinit.NbPages = 1;
+    s_eraseinit.Page      = 25 - 1;
+    s_eraseinit.NbPages   = 1;
 
     // Unlock flash
     HAL_FLASH_Unlock();
@@ -840,14 +867,14 @@ void LuosHAL_SaveNodeID(uint32_t address, uint16_t node_id)
 {
     uint32_t page_error = 0;
     FLASH_EraseInitTypeDef s_eraseinit;
-    uint32_t* p_start = (uint32_t*)address;
+    uint32_t *p_start = (uint32_t *)address;
 
-    uint32_t saved_data = *p_start;
+    uint32_t saved_data    = *p_start;
     uint32_t data_to_write = saved_data | (node_id << 8);
 
     s_eraseinit.TypeErase = FLASH_TYPEERASE_PAGES;
-    s_eraseinit.Page = 25 - 1;
-    s_eraseinit.NbPages = 1;
+    s_eraseinit.Page      = 25 - 1;
+    s_eraseinit.NbPages   = 1;
 
     // Unlock flash
     HAL_FLASH_Unlock();
@@ -866,9 +893,9 @@ void LuosHAL_SaveNodeID(uint32_t address, uint16_t node_id)
  ******************************************************************************/
 uint16_t LuosHAL_GetNodeID(uint32_t address)
 {
-    uint32_t* p_start = (uint32_t*)address;
-    uint32_t data = *p_start & 0x00FFFF00;
-    uint16_t node_id = (uint16_t)(data >> 8);
+    uint32_t *p_start = (uint32_t *)address;
+    uint32_t data     = *p_start & 0x00FFFF00;
+    uint16_t node_id  = (uint16_t)(data >> 8);
 
     return node_id;
 }
@@ -884,8 +911,8 @@ void LuosHAL_ProgramFlash(uint32_t address, uint8_t page, uint16_t size, uint8_t
     FLASH_EraseInitTypeDef s_eraseinit;
 
     s_eraseinit.TypeErase = FLASH_TYPEERASE_PAGES;
-    s_eraseinit.Page = page - 1;
-    s_eraseinit.NbPages = 1;
+    s_eraseinit.Page      = page - 1;
+    s_eraseinit.NbPages   = 1;
 
     // Unlock flash
     HAL_FLASH_Unlock();

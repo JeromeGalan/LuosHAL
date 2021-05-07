@@ -50,6 +50,7 @@ void LuosHAL_FlashReadLuosMemoryInfo(uint32_t addr, uint16_t size, uint8_t *data
 // bootloader functions
 void LuosHAL_DeInit(void);
 void LuosHAL_JumpToApp(uint32_t);
+uint8_t LuosHAL_GetMode(void);
 void LuosHAL_SetApplicationMode(void);
 void LuosHAL_SetBootloaderMode(void);
 void LuosHAL_SaveNodeID(uint32_t, uint16_t);
