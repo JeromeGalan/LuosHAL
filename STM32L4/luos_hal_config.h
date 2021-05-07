@@ -175,7 +175,4 @@
 #define NODE_ID_MASK   0x00FFFF00
 #define NODE_ID_OFFSET 8
 
-#define BOOTLOADER_MODE  0x00
-#define APPLICATION_MODE 0x01
-
 #endif /* _LUOSHAL_CONFIG_H_ */

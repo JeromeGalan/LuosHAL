@@ -789,23 +789,9 @@ void LuosHAL_JumpToApp(uint32_t app_addr)
 uint8_t LuosHAL_GetMode(void)
 {
     uint32_t *p_start = (uint32_t *)SHARED_MEMORY_ADDRESS;
-    uint8_t boot_mode = 0x00;
+    uint32_t data     = *p_start & BOOT_MODE_MASK;
 
-    uint32_t data = *p_start & BOOT_MODE_MASK;
-
-    switch (data)
-    {
-        case 0:
-            boot_mode = BOOTLOADER_MODE;
-            break;
-        case 1:
-            boot_mode = APPLICATION_MODE;
-            break;
-        default:
-            break;
-    }
-
-    return boot_mode;
+    return (uint8_t)data;
 }
 
 /******************************************************************************
