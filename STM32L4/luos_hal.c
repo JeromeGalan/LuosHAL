@@ -747,6 +747,41 @@ void LuosHAL_FlashReadLuosMemoryInfo(uint32_t addr, uint16_t size, uint8_t *data
 }
 
 /******************************************************************************
+ * @brief DeInit Bootloader peripherals
+ * @param 
+ * @return
+ ******************************************************************************/
+void LuosHAL_DeInit(void)
+{
+    HAL_RCC_DeInit();
+    HAL_DeInit();
+}
+
+/******************************************************************************
+ * @brief DeInit Bootloader peripherals
+ * @param 
+ * @return
+ ******************************************************************************/
+typedef void (*pFunction)(void); /*!< Function pointer definition */
+
+void LuosHAL_JumpToApp(uint32_t app_addr)
+{
+    uint32_t  JumpAddress = *(__IO uint32_t*)(app_addr + 4);
+    pFunction Jump        = (pFunction)JumpAddress;
+
+    __disable_irq();
+
+    SysTick->CTRL = 0;
+    SysTick->LOAD = 0;
+    SysTick->VAL  = 0;
+
+    SCB->VTOR = app_addr;
+
+    __set_MSP(*(__IO uint32_t*)app_addr);
+    Jump();
+}
+
+/******************************************************************************
  * @brief Set boot mode in shared flash memory
  * @param 
  * @return

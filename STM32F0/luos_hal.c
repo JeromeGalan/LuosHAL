@@ -748,6 +748,24 @@ void LuosHAL_FlashReadLuosMemoryInfo(uint32_t addr, uint16_t size, uint8_t *data
 }
 
 /******************************************************************************
+ * @brief DeInit Bootloader peripherals
+ * @param 
+ * @return
+ ******************************************************************************/
+void LuosHAL_DeInit(void)
+{
+}
+
+/******************************************************************************
+ * @brief DeInit Bootloader peripherals
+ * @param 
+ * @return
+ ******************************************************************************/
+void LuosHAL_JumpToApp(uint32_t app_addr)
+{
+}
+
+/******************************************************************************
  * @brief Set boot mode in shared flash memory
  * @param 
  * @return
