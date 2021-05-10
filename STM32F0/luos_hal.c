@@ -766,31 +766,50 @@ void LuosHAL_JumpToApp(uint32_t app_addr)
 }
 
 /******************************************************************************
- * @brief Set boot mode in shared flash memory
+ * @brief Return bootloader mode saved in flash
  * @param 
  * @return
  ******************************************************************************/
-void LuosHAL_SetBootloaderMode(void)
-{
-}
-
-/******************************************************************************
- * @brief Set boot mode in shared flash memory
- * @param 
- * @return
- ******************************************************************************/
-void LuosHAL_SaveNodeID(uint32_t address, uint16_t node_id)
-{
-}
-
-/******************************************************************************
- * @brief Set boot mode in shared flash memory
- * @param 
- * @return
- ******************************************************************************/
-uint16_t LuosHAL_GetNodeID(uint32_t address)
+uint8_t LuosHAL_GetMode(void)
 {
     return 0;
+}
+
+/******************************************************************************
+ * @brief Set boot mode in shared flash memory
+ * @param 
+ * @return
+ ******************************************************************************/
+void LuosHAL_SetMode(uint8_t mode)
+{
+}
+
+/******************************************************************************
+ * @brief Set boot mode in shared flash memory
+ * @param 
+ * @return
+ ******************************************************************************/
+void LuosHAL_SaveNodeID(uint16_t node_id)
+{
+}
+
+/******************************************************************************
+ * @brief Set boot mode in shared flash memory
+ * @param 
+ * @return
+ ******************************************************************************/
+uint16_t LuosHAL_GetNodeID()
+{
+    return 0;
+}
+
+/******************************************************************************
+ * @brief Save node ID in shared flash memory
+ * @param Address, node_id
+ * @return
+ ******************************************************************************/
+void LuosHAL_ProgramFlash(uint32_t address, uint8_t page, uint16_t size, uint8_t *data)
+{
 }
 
 /******************************************************************************

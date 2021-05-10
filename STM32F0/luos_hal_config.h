@@ -164,4 +164,17 @@
 #define ADDRESS_LAST_PAGE_FLASH     ((uint32_t)(FLASH_BANK1_END - FLASH_PAGE_SIZE))
 #endif
 
+/*******************************************************************************
+ * BOOTLOADER CONFIG
+ ******************************************************************************/
+#define SHARED_MEMORY_ADDRESS 0
+#define SHARED_FLASH_PAGE     0
+#define APP_ADDRESS           0
+#define APP_FLASH_PAGE        0
+
+#define BOOT_MODE_MASK   0
+#define BOOT_MODE_OFFSET 0
+#define NODE_ID_MASK     0
+#define NODE_ID_OFFSET   0
+
 #endif /* _LUOSHAL_CONFIG_H_ */
