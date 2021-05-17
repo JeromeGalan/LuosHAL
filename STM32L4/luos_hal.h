@@ -58,6 +58,7 @@ void LuosHAL_JumpToApp(uint32_t);
 uint8_t LuosHAL_GetMode(void);
 uint16_t LuosHAL_GetNodeID(void);
 void LuosHAL_ProgramFlash(uint32_t, uint8_t, uint16_t, uint8_t *);
+void LuosHAL_Delay(uint32_t);
 #endif
 
 #endif /* _LUOSHAL_H_ */

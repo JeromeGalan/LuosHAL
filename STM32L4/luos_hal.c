@@ -919,3 +919,15 @@ void LuosHAL_Reboot(void)
     // reset in bootloader mode
     NVIC_SystemReset();
 }
+
+#ifdef BOOTLOADER_CONFIG
+/******************************************************************************
+ * @brief Delay - blocking
+ * @param 
+ * @return
+ ******************************************************************************/
+void LuosHAL_Delay(uint32_t delay)
+{
+    HAL_Delay(delay);
+}
+#endif
