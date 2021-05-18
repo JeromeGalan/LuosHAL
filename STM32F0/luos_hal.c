@@ -747,6 +747,7 @@ void LuosHAL_FlashReadLuosMemoryInfo(uint32_t addr, uint16_t size, uint8_t *data
     memcpy(data, (void *)(addr), size);
 }
 
+#ifdef BOOTLOADER_CONFIG
 /******************************************************************************
  * @brief DeInit Bootloader peripherals
  * @param 
@@ -755,16 +756,22 @@ void LuosHAL_FlashReadLuosMemoryInfo(uint32_t addr, uint16_t size, uint8_t *data
 void LuosHAL_DeInit(void)
 {
 }
+#endif
 
+#ifdef BOOTLOADER_CONFIG
 /******************************************************************************
  * @brief DeInit Bootloader peripherals
  * @param 
  * @return
  ******************************************************************************/
+typedef void (*pFunction)(void); /*!< Function pointer definition */
+
 void LuosHAL_JumpToApp(uint32_t app_addr)
 {
 }
+#endif
 
+#ifdef BOOTLOADER_CONFIG
 /******************************************************************************
  * @brief Return bootloader mode saved in flash
  * @param 
@@ -772,8 +779,8 @@ void LuosHAL_JumpToApp(uint32_t app_addr)
  ******************************************************************************/
 uint8_t LuosHAL_GetMode(void)
 {
-    return 0;
 }
+#endif
 
 /******************************************************************************
  * @brief Set boot mode in shared flash memory
@@ -785,24 +792,26 @@ void LuosHAL_SetMode(uint8_t mode)
 }
 
 /******************************************************************************
- * @brief Set boot mode in shared flash memory
- * @param 
+ * @brief Save node ID in shared flash memory
+ * @param Address, node_id
  * @return
  ******************************************************************************/
 void LuosHAL_SaveNodeID(uint16_t node_id)
 {
 }
 
+#ifdef BOOTLOADER_CONFIG
 /******************************************************************************
- * @brief Set boot mode in shared flash memory
- * @param 
- * @return
+ * @brief Get node id saved in flash memory
+ * @param Address
+ * @return node_id
  ******************************************************************************/
-uint16_t LuosHAL_GetNodeID()
+uint16_t LuosHAL_GetNodeID(void)
 {
-    return 0;
 }
+#endif
 
+#ifdef BOOTLOADER_CONFIG
 /******************************************************************************
  * @brief Save node ID in shared flash memory
  * @param Address, node_id
@@ -811,6 +820,7 @@ uint16_t LuosHAL_GetNodeID()
 void LuosHAL_ProgramFlash(uint32_t address, uint8_t page, uint16_t size, uint8_t *data)
 {
 }
+#endif
 
 /******************************************************************************
  * @brief software reboot the microprocessor
@@ -820,3 +830,14 @@ void LuosHAL_ProgramFlash(uint32_t address, uint8_t page, uint16_t size, uint8_t
 void LuosHAL_Reboot(void)
 {
 }
+
+#ifdef BOOTLOADER_CONFIG
+/******************************************************************************
+ * @brief Delay - blocking
+ * @param 
+ * @return
+ ******************************************************************************/
+void LuosHAL_Delay(uint32_t delay)
+{
+}
+#endif
