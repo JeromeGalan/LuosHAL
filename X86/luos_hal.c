@@ -47,8 +47,6 @@ static void LuosHAL_RegisterPTP(void);
 static void __enable_irq();
 static void __disable_irq();
 
-
-
 /////////////////////////Luos Library Needed function///////////////////////////
 
 /******************************************************************************
@@ -182,7 +180,6 @@ void LuosHAL_SetRxState(uint8_t Enable)
         // disable Rx IT
     }
 }
-
 
 // DEBUG JGA// TODO JGA
 /******************************************************************************
@@ -341,7 +338,6 @@ void LuosHAL_ResetTimeout(uint16_t nbrbit)
     //enable timer
 }
 
-
 // DEBUG JGA// TODO JGA
 /******************************************************************************
  * @brief Luos Timeout communication
@@ -445,7 +441,6 @@ static void LuosHAL_RegisterPTP(void)
     PTP[3].IRQ  = PTPD_IRQ;
 #endif
 }
-
 
 // DEBUG JGA// TODO JGA
 /******************************************************************************
@@ -591,11 +586,10 @@ void LuosHAL_FlashWriteLuosMemoryInfo(uint32_t addr, uint16_t size, uint8_t *dat
  * @param Address info / size to read / pointer callback data to read
  * @return
  ******************************************************************************/
-    void LuosHAL_FlashReadLuosMemoryInfo(uint32_t addr, uint16_t size, uint8_t * data)
-    {
-        memcpy(data, (void *)(addr), size);
-    }
-
+void LuosHAL_FlashReadLuosMemoryInfo(uint32_t addr, uint16_t size, uint8_t *data)
+{
+    memcpy(data, (void *)(addr), size);
+}
 
 // DEBUG JGA// TODO JGA
 void __enable_irq()

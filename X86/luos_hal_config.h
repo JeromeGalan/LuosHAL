@@ -117,10 +117,10 @@
  * COM CONFIG
  ******************************************************************************/
 #ifndef LUOS_COM_CLOCK_ENABLE
-#define LUOS_COM_CLOCK_ENABLE()       \
-    do                                \
-    {                                 \
-        ;                             \
+#define LUOS_COM_CLOCK_ENABLE() \
+    do                          \
+    {                           \
+        ;                       \
     } while (0U)
 #endif
 #ifndef LUOS_COM
@@ -133,27 +133,25 @@
 #define LUOS_COM_IRQHANDLER() //STUB // DEBUG JGA
 #endif*/
 
-
 /*******************************************************************************
  * FLASH CONFIG
  ******************************************************************************/
 #ifndef LUOS_DMA_CLOCK_ENABLE
-#define LUOS_DMA_CLOCK_ENABLE()       \
-    do                                \
-    {                                 \
-        ;                             \
+#define LUOS_DMA_CLOCK_ENABLE() \
+    do                          \
+    {                           \
+        ;                       \
     } while (0U)
 #endif
-#ifndef LUOS_DMA 
-#define LUOS_DMA  X86_STUB //STUB // DEBUG JGA
+#ifndef LUOS_DMA
+#define LUOS_DMA X86_STUB //STUB // DEBUG JGA
 #endif
 #ifndef LUOS_DMA_CHANNEL
-#define LUOS_DMA_CHANNEL  X86_STUB //STUB // DEBUG JGA
+#define LUOS_DMA_CHANNEL X86_STUB //STUB // DEBUG JGA
 #endif
 #ifndef LUOS_DMA_REMAP
-#define LUOS_DMA_REMAP  X86_STUB //STUB // DEBUG JGA
+#define LUOS_DMA_REMAP X86_STUB //STUB // DEBUG JGA
 #endif
-
 
 /*******************************************************************************
  * COM TIMEOUT CONFIG
@@ -167,9 +165,10 @@
 #endif*/
 #ifndef LUOS_TIMER_CLOCK_ENABLE
 //#define LUOS_TIMER_LOCK_ENABLE() //STUB // DEBUG JGA
-#define LUOS_TIMER_CLOCK_ENABLE()   do                      \
-                                    {                       \
-                                    } while (0U)  //STUB // DEBUG JGA
+#define LUOS_TIMER_CLOCK_ENABLE() \
+    do                            \
+    {                             \
+    } while (0U) //STUB // DEBUG JGA
 #endif
 #ifndef LUOS_TIMER
 #define LUOS_TIMER X86_STUB //STUB // DEBUG JGA
